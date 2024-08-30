@@ -1,0 +1,12 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#weatherAppContainer {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
