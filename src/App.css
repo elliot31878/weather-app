@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+#root,
+html,
+head,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color-scheme: light dark;
+}
+
+.mapboxgl-ctrl-attrib-inner {
+  display: none;
+}

@@ -1,0 +1,30 @@
+.map-box {
+  width: 100%;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  flex-direction: column;
+  &__container {
+    height: 30rem;
+    width: calc(100% - 1rem);
+    canvas,
+    div {
+      border-radius: 1rem;
+      width: calc(100% - 1rem);
+    }
+  }
+  &__sidebar {
+    background-color: rgb(35 55 75 / 90%);
+    color: #fff;
+    padding: 6px 12px;
+    font-family: monospace;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 12px;
+    border-radius: 4px;
+  }
+}
