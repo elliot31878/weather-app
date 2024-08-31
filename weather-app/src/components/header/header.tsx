@@ -5,6 +5,7 @@ import { IWeatherData } from "../../layout/CI/geolocation.types"
 import { Typography } from "@mui/material"
 
 export const Header: React.FC<IWeatherData> = React.memo((weather) => {
+    console.log("weather : ", weather)
     return (
         <header className={styles["header"]}>
             <Typography variant="body1" fontWeight={"600"} className={styles["header__brand"]}>
@@ -15,7 +16,7 @@ export const Header: React.FC<IWeatherData> = React.memo((weather) => {
             </Typography>
             <section className={styles["header__actions"]}>
                 <Typography variant="body1" fontWeight={"600"} >
-                    Temperature : {weather.main.temp}
+                    Temperature : {weather.main.temp}℃
                 </Typography>
                 <Typography variant="body1" fontWeight={"600"} >
                     {weather.weather[0].description}

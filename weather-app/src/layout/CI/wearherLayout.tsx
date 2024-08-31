@@ -3,13 +3,15 @@ import { MapBox } from "../../components/mapbox/mapbox"
 import { Header } from "../../components/header/header"
 import { TEHRAN_LAT_LONG, WEATHER_MAP } from "../../constant/app.constant";
 import axios from "axios";
-import { IWeatherData } from "./geolocation.types";
+import { IWeatherData, IWeatherForcastData } from "./geolocation.types";
 
 import styles from './weather.module.scss'
 import { Button } from "@mui/material";
+import dayjs from "dayjs";
 
 export const WeatherLayout: React.FC = React.memo(() => {
     const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
+    const [fiveDatesLaterWeather, setFiveDatesLaterWeather] = useState<IWeatherForcastData[] | null>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [lat, setLat] = useState(TEHRAN_LAT_LONG.LAT);
     const [lng, setLng] = useState(TEHRAN_LAT_LONG.LONG);
@@ -18,11 +20,9 @@ export const WeatherLayout: React.FC = React.memo(() => {
     useEffect(() => {
 
         navigator.geolocation.getCurrentPosition((position) => {
-
             const { latitude, longitude } = position.coords;
             fetchWeatherData(latitude, longitude);
         }, () => {
-
             fetchWeatherData(TEHRAN_LAT_LONG.LAT, TEHRAN_LAT_LONG.LONG);
         });
 
@@ -34,12 +34,26 @@ export const WeatherLayout: React.FC = React.memo(() => {
             params: {
                 lat: latitude,
                 lon: longitude,
-                appid: apiKey,
                 units: 'metric',
+                appid: apiKey,
             },
         });
+        const today = dayjs().format('YYYY-MM-DD');
+        const fiveDaysLater = dayjs().add(5, 'minute').format('YYYY-MM-DD');
 
-        setWeatherData(response.data);
+        // Filter today's weather data
+        const todayData = response.data.list.filter((forecast: IWeatherForcastData) =>
+            forecast.dt_txt.startsWith(today)
+        );
+
+        // Filter weather data for 5 days from today
+        const fiveDatesLaterData: IWeatherForcastData[] = response.data.list.filter((forecast: IWeatherForcastData) =>
+            forecast.dt_txt.startsWith(fiveDaysLater)
+        )
+
+
+        setWeatherData({ ...todayData[0], name: response.data.city.name });
+        setFiveDatesLaterWeather(fiveDatesLaterData)
         setLat(latitude)
         setLng(longitude)
         setLoading(false);
@@ -50,6 +64,8 @@ export const WeatherLayout: React.FC = React.memo(() => {
         fetchWeatherData(lat, lng)
     }, [])
 
+
+
     if (loading) return null
 
     return (
@@ -57,6 +73,7 @@ export const WeatherLayout: React.FC = React.memo(() => {
             {weatherData && <Header {...weatherData} />}
             <MapBox onHandleChangeGeo={onHandleChangeGeo} lat={lat} long={lng} />
             <Button onClick={() => window.closeApp && window.closeApp(weatherData)}>Close App</Button>
+            {fiveDatesLaterWeather && <></>}
         </main>
     )
 })
