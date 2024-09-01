@@ -9,5 +9,13 @@ export default defineConfig({
   // define process env
   define: {
     'process.env': process.env
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/index.js',
+        assetFileNames: 'assets/index.css',
+      },
+    },
+  },
 })
