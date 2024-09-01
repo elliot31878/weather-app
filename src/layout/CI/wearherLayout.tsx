@@ -49,14 +49,27 @@ export const WeatherLayout: React.FC = React.memo(() => {
     const onHandleChangeGeo = useCallback((lat: number, lng: number) => {
         fetchWeatherData(lat, lng)
     }, [])
-
+    const handleClose = () => {
+        // Pass weather data to the parent window
+        if (weatherData) {
+            window.parent.postMessage({
+                type: 'weatherData',
+                weather: {
+                    location: weatherData.name,
+                    temperature: `${weatherData.main.temp}°C`,
+                    description: weatherData.weather[0].description,
+                    lastUpdated: new Date().toLocaleString(),
+                },
+            }, '*');
+        }
+    };
     if (loading) return null
 
     return (
         <main className={styles["weather-main"]}>
             {weatherData && <Header {...weatherData} />}
             <MapBox onHandleChangeGeo={onHandleChangeGeo} lat={lat} long={lng} />
-            <Button onClick={() => window.closeApp && window.closeApp(weatherData)}>Close App</Button>
+            <Button onClick={() => handleClose()}>Close App</Button>
         </main>
     )
 })
