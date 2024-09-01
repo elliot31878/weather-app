@@ -1,0 +1,17 @@
+.card {
+  width: 20rem;
+  min-width: 10rem;
+  height: 8rem;
+  max-height: 8rem;
+  border-radius: 1rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 1rem;
+  justify-content: space-between;
+  &__title,
+  &__temp {
+    color: black;
+  }
+}

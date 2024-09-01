@@ -1,0 +1,31 @@
+.list {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  padding-block-start: 5rem;
+  &__content {
+    width: 90%;
+    height: 10rem;
+    background-color: rgb(114, 113, 113);
+    border-radius: 1rem;
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+    padding: 1rem;
+    &--prev,
+    &--next {
+      border-radius: 1rem !important;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+    &--cards {
+      width: 100%;
+      display: flex;
+      overflow: hidden;
+      gap: 1rem;
+    }
+  }
+}
