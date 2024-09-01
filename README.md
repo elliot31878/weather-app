@@ -1,50 +1,68 @@
-# React + TypeScript + Vite
+### 2. Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Technology**: React with Vite
+- **Purpose**: To display the user’s current location and weather-related details, including forecasts.
+- **Implementation**:
+  - **React**: Used for building the user interface.
+  - **Vite**: Chosen for its fast performance and ease of use as a development server and build tool.
+  - **Axios**: For making API requests to fetch weather data from the OpenWeather API.
+  - **OpenWeather API**: Provides current weather and forecast data.
+  - **Mapbox**: Used to show the user's location on a map and interact with it to change weather data based on location.
+  - **Day.js**: For managing and displaying dates and times related to weather forecasts.
 
-Currently, two official plugins are available:
+## Key Decisions and Reasoning
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Technology Choices
 
-## Expanding the ESLint configuration
+- **React and Vite**:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  - **React**: Provides a robust framework for building interactive user interfaces efficiently.
+  - **Vite**: Selected for its speed and simplicity in the development process.
 
-- Configure the top-level `parserOptions` property like this:
+- **Axios**:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+  - **Reason**: A popular and well-documented HTTP client for making API requests, simplifying handling asynchronous operations.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **OpenWeather API**:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+  - **Reason**: Offers comprehensive weather data with a straightforward API, suitable for both current weather and forecasts.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Mapbox**:
+
+  - **Reason**: Provides detailed and interactive maps, essential for displaying and updating the user's location.
+
+- **Day.js**:
+  - **Reason**: A lightweight and easy-to-use date library for managing weather forecast data and timestamps.
+
+### 2. Handling the Weather App in the Landing Page
+
+- **Dynamic Loading**:
+
+  - **Reason**: The weather app is loaded dynamically when the user clicks a button. This ensures the initial load time of the landing page remains fast, with the React app only loading when needed.
+
+- **Bundling and Deployment**:
+  - **Reason**: The React app is built and bundled using Vite and deployed separately from the landing page. The `bundle.js` file is referenced in the landing page’s HTML to load the React app.
+
+### 3. Deployment Strategy
+
+- **Firebase Hosting**:
+
+  - **Reason**: Firebase provides reliable hosting for static and dynamic content with easy deployment through the Firebase CLI.
+
+- **GitHub Actions**:
+  - **Reason**: Automated deployment using GitHub Actions ensures that every push to the repository triggers a deployment to Firebase, streamlining the development workflow.
+
+## Testing
+
+- **Jest**:
+
+  - **Reason**: Used for unit testing to ensure the reliability of React components and their interactions.
+
+- **End-to-End (E2E) Testing**:
+  - **Reason**: Not implemented in this initial version but recommended for future improvements to test the complete workflow of user interactions.
+
+## Future Improvements
+
+- **E2E Testing**: Integrate end-to-end testing frameworks like Cypress to test the entire flow from the landing page to the weather app.
+- **Accessibility Enhancements**: Ensure both the landing page and weather app are fully accessible to users with disabilities.
+- **Performance Optimization**: Optimize performance based on user feedback and analytics, particularly focusing on load times and responsiveness.
