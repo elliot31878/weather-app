@@ -28,7 +28,14 @@
     align-items: flex-end;
     justify-content: center;
     padding-inline-end: 2rem;
-
     flex-direction: column;
+  }
+  &__close {
+    border-radius: 20rem !important;
+    color: white !important;
+    margin-inline: 1rem !important;
+    width: 50px;
+    min-width: 50px !important;
+    height: 40px;
   }
 }
