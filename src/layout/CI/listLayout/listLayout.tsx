@@ -39,7 +39,7 @@ export const ListLayout: React.FC<IListLayoutProps> = React.memo(({ lat, lng }) 
 
         const fetchWeather = async () => {
             try {
-                const response = await axios.get(String(process.env.BASE_API_FORCAST_URL), {
+                const response = await axios.get(String(process.env.BASE_API_FORECAST_URL), {
                     params: {
                         lat: lat,
                         lon: lng,
@@ -49,7 +49,7 @@ export const ListLayout: React.FC<IListLayoutProps> = React.memo(({ lat, lng }) 
                 });
 
 
-                const fiveDaysLater = dayjs().add(5, 'day').format('YYYY-MM-DD');
+                const fiveDaysLater = dayjs().add(5, 'hour').format('YYYY-MM-DD');
 
 
                 const fiveDaysLaterData = response.data.list.filter((forecast: WeatherForecastTypes) =>
